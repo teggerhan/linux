@@ -54,93 +54,93 @@
 #define SJA1000_MAX_IRQ 20	/* max. number of interrupts handled in ISR */
 
 /* SJA1000 registers - manual section 6.4 (Pelican Mode) */
-#define SJA1000_MOD		0x00
-#define SJA1000_CMR		0x01
-#define SJA1000_SR		0x02
-#define SJA1000_IR		0x03
-#define SJA1000_IER		0x04
-#define SJA1000_ALC		0x0B
-#define SJA1000_ECC		0x0C
-#define SJA1000_EWL		0x0D
-#define SJA1000_RXERR		0x0E
-#define SJA1000_TXERR		0x0F
-#define SJA1000_ACCC0		0x10
-#define SJA1000_ACCC1		0x11
-#define SJA1000_ACCC2		0x12
-#define SJA1000_ACCC3		0x13
-#define SJA1000_ACCM0		0x14
-#define SJA1000_ACCM1		0x15
-#define SJA1000_ACCM2		0x16
-#define SJA1000_ACCM3		0x17
-#define SJA1000_RMC		0x1D
-#define SJA1000_RBSA		0x1E
+#define SJA1000_MOD		0x00  //模式
+#define SJA1000_CMR		0x01  //命令
+#define SJA1000_SR		0x02  //状态
+#define SJA1000_IR		0x03  //中断
+#define SJA1000_IER		0x04  //中断使能
+#define SJA1000_ALC		0x0B  //arbitration lost capture
+#define SJA1000_ECC		0x0C  //error code capture
+#define SJA1000_EWL		0x0D  //error warning limit
+#define SJA1000_RXERR		0x0E  //RX error counter
+#define SJA1000_TXERR		0x0F  //TX error counter
+#define SJA1000_ACCC0		0x10  //acceptance code 0
+#define SJA1000_ACCC1		0x11  //acceptance code 1
+#define SJA1000_ACCC2		0x12  //acceptance code 2
+#define SJA1000_ACCC3		0x13  //acceptance code 3
+#define SJA1000_ACCM0		0x14  //acceptance mask 0
+#define SJA1000_ACCM1		0x15  //acceptance mask 1
+#define SJA1000_ACCM2		0x16  //acceptance mask 2
+#define SJA1000_ACCM3		0x17  //acceptance mask 3
+#define SJA1000_RMC		0x1D  //RX message counter
+#define SJA1000_RBSA		0x1E  //RX buffer start address
 
-/* Common registers - manual section 6.5 */
-#define SJA1000_BTR0		0x06
-#define SJA1000_BTR1		0x07
-#define SJA1000_OCR		0x08
-#define SJA1000_CDR		0x1F
+/* Common registers - manual section 6.5 */ //6.5
+#define SJA1000_BTR0		0x06  //BUS TIMING REGISTER 0 (BTR0)
+#define SJA1000_BTR1		0x07  //BUS TIMING REGISTER 1 (BTR1)
+#define SJA1000_OCR		0x08  //OUTPUT CONTROL REGISTER (OCR)
+#define SJA1000_CDR		0x1F  //CLOCK DIVIDER REGISTER (CDR)
+//page 39 and page 47
+#define SJA1000_FI		0x10  //
+#define SJA1000_SFF_BUF		0x13  //
+#define SJA1000_EFF_BUF		0x15  //
+//Table 34 RX frame information (SFF); CAN address 16?
+#define SJA1000_FI_FF		0x80 //bit 7
+#define SJA1000_FI_RTR		0x40 //bit 6
 
-#define SJA1000_FI		0x10
-#define SJA1000_SFF_BUF		0x13
-#define SJA1000_EFF_BUF		0x15
-
-#define SJA1000_FI_FF		0x80
-#define SJA1000_FI_RTR		0x40
-
-#define SJA1000_ID1		0x11
-#define SJA1000_ID2		0x12
-#define SJA1000_ID3		0x13
-#define SJA1000_ID4		0x14
+#define SJA1000_ID1		0x11  //Table 29 TX identifier 1 (EFF); CAN address 17
+#define SJA1000_ID2		0x12  //Table 30 TX identifier 2 (EFF); CAN address 18
+#define SJA1000_ID3		0x13  //Table 31 TX identifier 3 (EFF); CAN address 19
+#define SJA1000_ID4		0x14  //Table 32 TX identifier 4 (EFF); CAN address 20
 
 #define SJA1000_CAN_RAM		0x20
 
-/* mode register */
-#define MOD_RM		0x01
-#define MOD_LOM		0x02
-#define MOD_STM		0x04
-#define MOD_AFM		0x08
-#define MOD_SM		0x10
+/* mode register */         //6.4.2 RESET VALUES
+#define MOD_RM		0x01  // Reset Mode
+#define MOD_LOM		0x02  // Listen Only Mode
+#define MOD_STM		0x04  // Self Test Mode
+#define MOD_AFM		0x08  // Acceptance Filter Mode
+#define MOD_SM		0x10  // Sleep Mode
 
-/* commands */
-#define CMD_SRR		0x10
-#define CMD_CDO		0x08
-#define CMD_RRB		0x04
-#define CMD_AT		0x02
-#define CMD_TR		0x01
+/* commands */    //6.4.2 RESET VALUES
+#define CMD_SRR		0x10    // Self Reception Request
+#define CMD_CDO		0x08   //Clear Data Overrun
+#define CMD_RRB		0x04   // Release Receive Buffer
+#define CMD_AT		0x02  // Abort Transmission
+#define CMD_TR		0x01  //Transmission Request
 
-/* interrupt sources */
-#define IRQ_BEI		0x80
-#define IRQ_ALI		0x40
-#define IRQ_EPI		0x20
-#define IRQ_WUI		0x10
-#define IRQ_DOI		0x08
-#define IRQ_EI		0x04
-#define IRQ_TI		0x02
-#define IRQ_RI		0x01
-#define IRQ_ALL		0xFF
+/* interrupt sources */   //6.4.2 RESET VALUES
+#define IRQ_BEI		0x80  // Bus Error Interrupt
+#define IRQ_ALI		0x40  //Arbitration Lost Interrupt
+#define IRQ_EPI		0x20  //Error Passive Interrupt
+#define IRQ_WUI		0x10  // Wake-Up Interrupt
+#define IRQ_DOI		0x08  //Data Overrun Interrupt
+#define IRQ_EI		0x04  //Error Interrupt	
+#define IRQ_TI		0x02  //Transmit Interrupt
+#define IRQ_RI		0x01  //Receive Interrupt
+#define IRQ_ALL		0xFF  
 #define IRQ_OFF		0x00
 
-/* status register content */
-#define SR_BS		0x80
-#define SR_ES		0x40
-#define SR_TS		0x20
-#define SR_RS		0x10
-#define SR_TCS		0x08
-#define SR_TBS		0x04
-#define SR_DOS		0x02
-#define SR_RBS		0x01
+/* status register content */  //6.3.5 STATUS REGISTER (SR) or 6.4.2 RESET VALUES
+#define SR_BS		0x80  //Bus Status
+#define SR_ES		0x40  //Error Status
+#define SR_TS		0x20  //Transmit Status
+#define SR_RS		0x10  //Receive Status
+#define SR_TCS		0x08  //Transmission Complete Status
+#define SR_TBS		0x04  //Transmit Buffer Status
+#define SR_DOS		0x02  //Data Overrun Status
+#define SR_RBS		0x01  //Receive Buffer Status
 
 #define SR_CRIT (SR_BS|SR_ES)
 
-/* ECC register */
-#define ECC_SEG		0x1F
-#define ECC_DIR		0x20
-#define ECC_ERR		6
-#define ECC_BIT		0x00
-#define ECC_FORM	0x40
-#define ECC_STUFF	0x80
-#define ECC_MASK	0xc0
+/* ECC register */  //ERROR CODE CAPTURE REGISTER (ECC)
+#define ECC_SEG		0x1F  //ECC.0~ECC.4
+#define ECC_DIR		0x20  //Direction 1 RX, 0 TX
+#define ECC_ERR		6     //?
+#define ECC_BIT		0x00 //bit error
+#define ECC_FORM	0x40 //form error
+#define ECC_STUFF	0x80 // stuff error
+#define ECC_MASK	0xc0 // ?
 
 /*
  * Flags for sja1000priv.flags
